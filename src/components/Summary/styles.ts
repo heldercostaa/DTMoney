@@ -1,6 +1,15 @@
 import styled from 'styled-components';
 
-export const Container = styled.div`
+const colors = {
+  green: '#33cc95',
+  red: '#e52e4d',
+}
+
+type ContainerProps = {
+  activeColor: 'green' | 'red';
+}
+
+export const Container = styled.div<ContainerProps>`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 2rem;
@@ -27,7 +36,7 @@ export const Container = styled.div`
     }
 
     &.highlight-background {
-      background: var(--green);
+      background: ${({ activeColor }) => colors[activeColor]};
       color: #fff;
     }
   }

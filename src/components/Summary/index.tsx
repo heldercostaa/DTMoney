@@ -1,6 +1,4 @@
-import { useContext } from "react";
-
-import { TransactionsContext } from "../../TransactionsContext";
+import { useTransactions } from "../../hooks/useTransactions";
 
 import incomeImg from "../../assets/income.svg";
 import outcomeImg from "../../assets/outcome.svg";
@@ -9,7 +7,7 @@ import totalImg from "../../assets/total.svg";
 import { Container } from "./styles";
 
 export function Summary() {
-  const { transactions } = useContext(TransactionsContext);
+  const { transactions } = useTransactions();
 
   const summary = transactions.reduce(
     (acc, transaction) => {
@@ -48,7 +46,7 @@ export function Summary() {
   }).format(summary.total);
 
   return (
-    <Container>
+    <Container activeColor={summary.total >= 0 ? "green" : "red"}>
       <div>
         <header>
           <p>Income</p>
@@ -61,7 +59,7 @@ export function Summary() {
           <p>Outcome</p>
           <img src={outcomeImg} alt="Outcomes" />
         </header>
-        <strong>- {withdraws}</strong>
+        <strong>-{withdraws}</strong>
       </div>
       <div className="highlight-background">
         <header>
